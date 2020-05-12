@@ -1,6 +1,7 @@
 package triangulo;
 
-public interface FiguraGeometrica {
+public interface FiguraGeometricaBidimensional {
+	
 
 	public String getTipoFigura();
 }

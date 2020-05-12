@@ -1,31 +1,35 @@
 package triangulo;
 
 
-
-public class Triangulo implements FiguraGeometrica {
-
+public class Triangulo implements FiguraGeometricaBidimensional {
 	private float lado1;
 	private float lado2;
 	private float lado3;
 	
-	private boolean condicaoExistencia(float a, float b, float c) {
-		return Math.abs(b - c) < a && a < b + c;
+	private boolean condicaoDeExistencia(float a,float b, float c ) {
+		return Math.abs(b - c) <a && a<b +c ;
 	}
-
+	
 	public Triangulo() {
-		this.lado1 = 1;
-		this.lado2 = 1;
-		this.lado3 = 1;
+		this.lado1 = lado1;
+		this.lado2 = lado2;
+		this.lado3 = lado3;
 	}
-
+	
+	public Triangulo(float lado1, float lado2, float lado3) {
+		if(!condicaoDeExistencia(lado1, lado2, lado3))
+			throw new IllegalStateException("Não é um triangulo");
+		this.lado1 = lado1;
+		this.lado2 = lado2;
+		this.lado3 = lado3;
+	}
 	public float getLado1() {
 		return lado1;
 	}
 
 	public void setLado1(float lado1) {
-		if(condicaoExistencia(lado1, lado2, lado3)) {
 			this.lado1 = lado1;
-		}
+		
 	}
 
 	public float getLado2() {
@@ -41,13 +45,20 @@ public class Triangulo implements FiguraGeometrica {
 	}
 
 	public void setLado3(float lado3) {
-		this.lado3 = lado3;
+		if(condicaoDeExistencia(lado1, lado2, lado3)) {
+			this.lado3 = lado3;
+		}
+		
 	}
-
+	
 	@Override
 	public String getTipoFigura() {
-		// TODO fazer a implementação
-		return "";
+		if(lado1 == lado2 && lado2 == lado3)
+			return "Equilátero";
+		else if(lado1 != lado2 && lado2 != lado3 && lado3 != lado1)
+			return "Escaleno";
+		else 
+			return "Isósceles";
 	}
 	
 	@Override
@@ -55,3 +66,4 @@ public class Triangulo implements FiguraGeometrica {
 		return "["+ lado1 + ":" + lado2 + ":" + lado3 + "]";
 	}
 }
+	
